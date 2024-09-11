@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Healthcare voice",
+  "name": "Prosper AI",
   "logo": {
     "dark": "/logo/prosper_logo.svg",
     "light": "/logo/prosper_logo.svg"
@@ -13,7 +13,11 @@
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
-    }
+    },
+  },
+  "modeToggle": {
+    "default": "light",
+    "isHidden": true
   },
   "topbarLinks": [
     {
