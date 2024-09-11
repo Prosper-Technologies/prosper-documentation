@@ -35,6 +35,14 @@
       "url": "api-reference"
     }
   ],
+  "anchors": [
+    {
+      "name": "API Reference",
+      "openapi": "https://voice.getprosperapp.com/openapi.json",
+      "url": "api-reference",
+      "icon": "square-terminal"
+    }
+  ],
   "navigation": [
     {
       "group": "Get Started",
