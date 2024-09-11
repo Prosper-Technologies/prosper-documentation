@@ -5,7 +5,7 @@
     "dark": "/logo/prosper_logo.svg",
     "light": "/logo/prosper_logo.svg"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
     "primary": "#07C983",
     "light": "#07C983",
@@ -22,12 +22,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:josep.mingot@useprosper.co"
+      "url": "mailto:support@useprosper.co"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://platform.getprosperapp.com"
   },
   "tabs": [
     {
