@@ -35,19 +35,6 @@
       "url": "api-reference"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "API Reference",
-      "openapi": "https://voice.getprosperapp.com/openapi.json",
-      "url": "api-reference",
-      "icon": "square-terminal"
-    }
-  ],
   "navigation": [
     {
       "group": "Get Started",
