@@ -54,7 +54,7 @@
       "group": "Quickstart",
       "pages": [
         "quickstart/outbound-call",
-        "quickstart/inobound-call",
+        "quickstart/inbound-call",
         "quickstart/export-data"
       ]
     },
