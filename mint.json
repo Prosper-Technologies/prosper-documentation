@@ -47,9 +47,15 @@
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "introduction"
+      ]
+    },
+    {
+      "group": "Quickstart",
+      "pages": [
+        "Make first outbound call",
+        "Make first inbound call",
+        "Get post-call data"
       ]
     },
     {
