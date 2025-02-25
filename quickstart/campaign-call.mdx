@@ -16,7 +16,7 @@ While campaigns can be created via the API, we **recommend cloning campaigns thr
 
 ### 1. Add Targets to a Campaign
 
-Once a campaign is created, targets must be added using the following endpoint:
+Once a campaign is created, targets must be added using the [Add Targets](/api-reference/campaigns/add-targets) endpoint:
 
 ```http
 POST /campaigns/{campaign_id}/targets
@@ -26,7 +26,7 @@ POST /campaigns/{campaign_id}/targets
 
 ### 2. Execute Calls
 
-After adding targets, execute calls by specifying which targets to include:
+After adding targets, execute calls by specifying which targets to include in the [Campaign Call](/api-reference/campaigns/campaign-call) endpoint:
 
 ```http
 POST /campaigns/{campaign_id}/call
