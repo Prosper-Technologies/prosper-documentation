@@ -53,6 +53,7 @@
     {
       "group": "Quickstart",
       "pages": [
+        "quickstart/campaign-call",
         "quickstart/outbound-call",
         "quickstart/inbound-call",
         "quickstart/export-data"
