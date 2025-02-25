@@ -1,5 +1,61 @@
 ---
-title: 'Calling from Campaigns'
-description: 'Description of your new file.'
+title: "Executing Calls within a Campaign"
+description: "Learn how to execute phone calls within a campaign using the Prosper AI Voice Agent API."
 ---
 
+## Overview
+
+Campaigns are used to group similar types of inbound or outbound calls. Each campaign defines:
+- The AI voice agent to be used.
+- QA settings for monitoring call quality.
+- Post-call data extraction settings.
+
+While campaigns can be created via the API, we **recommend cloning campaigns through the API** and performing all campaign definitions, especially post-call data configuration, via the Prosper platform.
+
+## Steps to Execute Calls within a Campaign
+
+### 1. Add Targets to a Campaign
+
+Once a campaign is created, targets must be added using the following endpoint:
+
+```http
+POST /campaigns/{campaign_id}/targets
+```
+
+**Targets** contain the specific information required to execute each call, such as the phone number and any relevant metadata.
+
+### 2. Execute Calls
+
+After adding targets, execute calls by specifying which targets to include:
+
+```http
+POST /campaigns/{campaign_id}/call
+```
+
+This endpoint can execute calls for specific targets or for all targets in the campaign.
+
+### 3. Receive Call Results
+
+Each campaign defines a **customizable webhook** to receive call results. Once a call is completed, the webhook will receive the `call_log_id`.
+
+### 4. Retrieve Call Logs
+
+Using the `call_log_id`, detailed information about the call can be retrieved with the following endpoint:
+
+```http
+GET /call_logs/{call_log_id}
+```
+
+This provides access to all relevant call data, including transcripts, metadata, and outcomes.
+
+## Summary
+
+| Step | Action |
+|------|--------|
+| **1** | Create or clone a campaign via the Prosper platform |
+| **2** | Add targets using `/campaigns/{campaign_id}/targets` |
+| **3** | Execute calls using `/campaigns/{campaign_id}/call` |
+| **4** | Receive results via the campaign’s webhook |
+| **5** | Retrieve call details using `/call_logs/{call_log_id}` |
+
+For additional details, refer to the API reference or reach out to our support team.
