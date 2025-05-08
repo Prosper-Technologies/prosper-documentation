@@ -6,6 +6,7 @@ description: "Learn how to execute phone calls within a campaign using the Prosp
 ## Overview
 
 Campaigns are used to group similar types of inbound or outbound calls. Each campaign defines:
+
 - The AI voice agent to be used.
 - QA settings for monitoring call quality.
 - Post-call data extraction settings.
@@ -14,48 +15,78 @@ While campaigns can be created via the API, we **recommend cloning campaigns thr
 
 ## Steps to Execute Calls within a Campaign
 
-### 1. Add Targets to a Campaign
+### 1. Add & execute targets
 
-Once a campaign is created, targets must be added using the [Add Targets](/api-reference/campaigns/add-targets) endpoint:
+Once a campaign is created, targets must be added using the [create targets ](https://docs.getprosperapp.com/api-reference/campaigns/add-targets)endpoint:
 
-```http
-POST /campaigns/{campaign_id}/targets
+```
+POST /v1/campaigns/{campaign_id}/targets
 ```
 
-**Targets** contain the specific information required to execute each call, such as the phone number and any relevant metadata.
+**Targets** contain the specific information required to execute each call, such as the phone number and any relevant metadata. For calling the targets at the same time, use the body param: `"launch": true`
 
-### 2. Execute Calls
+For exemple:
 
-After adding targets, execute calls by specifying which targets to include in the [Campaign Call](/api-reference/campaigns/campaign-call) endpoint:
-
-```http
-POST /campaigns/{campaign_id}/call
+```
+{
+  "targets": [],
+  "launch": true
+}
 ```
 
-This endpoint can execute calls for specific targets or for all targets in the campaign.
+In case you need to have traceability and link once of your resources to a target you can directly pass the target id as part of the body as long as the id is a valid v4 UUID, or include your id as part of the input data (which can be any kind of data type. We recommend using the id options as it’ll be faster to search and you can store in your system as needed. 
 
-### 3. Receive Call Results
-
-Each campaign defines a **customizable webhook** to receive call results. Once a call is completed, the webhook will receive the `call_log_id`.
-
-### 4. Retrieve Call Logs
-
-Using the `call_log_id`, detailed information about the call can be retrieved from the [Get Call Log](/api-reference/call-logs/get-call-log) endpoint:
-
-```http
-GET /call_logs/{call_log_id}
+```
+{
+  "targets": [
+    {
+      "id": "3ef78020-1e89-4496-9538-695f257ee001",
+      "phone_number": "+123456789",
+      "input_data": {
+        "my_resource_id" <ID>
+      }
+    }
+  ],
+  "launch": true
+}  
 ```
 
-This provides access to all relevant call data, including transcripts, metadata, and outcomes.
+### 2. Receive Target Results
+
+Each campaign defines a **customizable webhook** to receive target results. Once a target is finished, the webhook will receive:
+
+```
+{
+  "campaign_id": uuid,
+  "call_log_id": int,
+  "target_id": uuid,
+  "attempt": int,
+  "max_attempts": int,
+  "next_attempt_scheduled": datetz
+}
+```
+
+You can configure this weebhok inside the Prosper platform under the campaign notifications section at `Campaign > Settings > Notificaitions`
+
+Enable the campaign target finished and save the configuration with the endpoint where you want to receive the updates
+
+### 3. Retrieve Target 
+
+Using the `target_id`, detailed information about the call can be retrieved from the [Get target](https://docs.getprosperapp.com/api-reference/targets/get-target-router) endpoint:
+
+```
+GET /v1/targets/{target_id}
+```
+
+This provides access to all relevant call data, including transcripts, metadata and QA, and outcomes.
 
 ## Summary
 
-| Step | Action |
-|------|--------|
-| **1** | Create or clone a campaign via the Prosper platform |
-| **2** | Add targets using `/campaigns/{campaign_id}/targets` |
-| **3** | Execute calls using `/campaigns/{campaign_id}/call` |
-| **4** | Receive results via the campaign’s webhook |
-| **5** | Retrieve call details using `/call_logs/{call_log_id}` |
+| Step  | Action                                                                         |
+| ----- | ------------------------------------------------------------------------------ |
+| **1** | Create or clone a campaign via the Prosper platform                            |
+| **2** | Add targets and execute calls using `POST /v1/campaigns/{campaign_id}/targets` |
+| **4** | Receive results via the campaign’s webhook                                     |
+| **5** | Retrieve the target details using `GET /v1/targets/{target_id} `               |
 
 For additional details, refer to the API reference or reach out to our support team.
