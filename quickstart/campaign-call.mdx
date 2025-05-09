@@ -20,7 +20,7 @@ While campaigns can be created via the API, we **recommend cloning campaigns thr
 Once a campaign is created, targets must be added using the [create targets ](https://docs.getprosperapp.com/api-reference/campaigns/add-targets)endpoint:
 
 ```
-POST /v1/campaigns/{campaign_id}/targets
+POST /api/v1/campaigns/{campaign_id}/targets
 ```
 
 **Targets** contain the specific information required to execute each call, such as the phone number and any relevant metadata. For calling the targets at the same time, use the body param: `"launch": true`
@@ -34,7 +34,7 @@ For exemple:
 }
 ```
 
-In case you need to have traceability and link once of your resources to a target you can directly pass the target id as part of the body as long as the id is a valid v4 UUID, or include your id as part of the input data (which can be any kind of data type. We recommend using the id options as it’ll be faster to search and you can store in your system as needed. 
+In case you need to have traceability and link once of your resources to a target you can directly pass the target id as part of the body as long as the id is a valid v4 UUID, or include your id as part of the input data (which can be any kind of data type. We recommend using the id options as it’ll be faster to search and you can store in your system as needed.
 
 ```
 {
@@ -70,23 +70,23 @@ You can configure this weebhok inside the Prosper platform under the campaign no
 
 Enable the campaign target finished and save the configuration with the endpoint where you want to receive the updates
 
-### 3. Retrieve Target 
+### 3. Retrieve Target
 
 Using the `target_id`, detailed information about the call can be retrieved from the [Get target](https://docs.getprosperapp.com/api-reference/targets/get-target-router) endpoint:
 
 ```
-GET /v1/targets/{target_id}
+GET /api/v1/targets/{target_id}
 ```
 
 This provides access to all relevant call data, including transcripts, metadata and QA, and outcomes.
 
 ## Summary
 
-| Step  | Action                                                                         |
-| ----- | ------------------------------------------------------------------------------ |
-| **1** | Create or clone a campaign via the Prosper platform                            |
-| **2** | Add targets and execute calls using `POST /v1/campaigns/{campaign_id}/targets` |
-| **4** | Receive results via the campaign’s webhook                                     |
-| **5** | Retrieve the target details using `GET /v1/targets/{target_id} `               |
+| Step  | Action                                                                             |
+| ----- | ---------------------------------------------------------------------------------- |
+| **1** | Create or clone a campaign via the Prosper platform                                |
+| **2** | Add targets and execute calls using `POST /api/v1/campaigns/{campaign_id}/targets` |
+| **4** | Receive results via the campaign’s webhook                                         |
+| **5** | Retrieve the target details using `GET /api/v1/targets/{target_id} `               |
 
 For additional details, refer to the API reference or reach out to our support team.
