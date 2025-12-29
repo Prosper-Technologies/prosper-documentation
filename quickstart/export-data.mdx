@@ -1,10 +1,141 @@
 ---
-title: 'Export data'
-description: 'Use the API to export data from a given campaign'
+title: "Export Data from Campaigns"
+description: "Learn how to export and retrieve call data from campaigns using the Prosper API."
 ---
 
-<Note>
-  Documentaiton work in progress
-</Note>
+## Overview
 
-Check API Reference for [List Calls](/api-reference/calls/list-calls) and [Get Calls](/api-reference/call-logs/get-call-log)
+After executing calls within a campaign, you can export and retrieve detailed call data including transcripts, metadata, QA results, and outcomes. The Prosper API provides endpoints to list and retrieve call logs for comprehensive data analysis and integration with your systems.
+
+## Exporting Call Data
+
+### 1. List Call Logs
+
+To retrieve all call logs from a specific campaign, use the [List Call Logs](https://docs.getprosperapp.com/api-reference/call-logs/list-call-logs) endpoint:
+
+```
+GET /api/v1/campaigns/call-logs?campaign_id={campaign_id}
+```
+
+This endpoint supports several query parameters for filtering and pagination:
+
+- **`page`**: Page number for pagination (default: 1)
+- **`page_size`**: Number of results per page (default: 20, max: 100)
+- **`status`**: Filter by call status (e.g., `completed`, `failed`, `in_progress`)
+- **`from_date`**: Filter calls from a specific date
+- **`to_date`**: Filter calls up to a specific date
+
+**Example request:**
+
+```bash
+GET /api/v1/campaigns/call-logs?campaign_id={campaign_id}&page=1&page_size=50&status=completed
+```
+
+The response includes a paginated list of call logs with summary information for each call, such as:
+
+```json
+{
+  "items": [
+    {
+      "call_log_id": 12345,
+      "target_id": "3ef78020-1e89-4496-9538-695f257ee001",
+      "status": "completed",
+      "duration": 180,
+      "created_at": "2024-01-15T10:30:00Z",
+      "phone_number": "+123456789"
+    }
+  ],
+  "total": 150,
+  "page": 1,
+  "page_size": 50
+}
+```
+
+### 2. Get Individual Call Log Details
+
+For detailed information about a specific call, use the [Get Call Log](https://docs.getprosperapp.com/api-reference/call-logs/get-call-log) endpoint:
+
+```
+GET /api/v1/call-logs/{call_log_id}
+```
+
+This endpoint returns comprehensive call information including:
+
+- **Full transcript**: Complete conversation between the AI agent and the participant
+- **Extracted data**: Post-call data extraction results based on campaign configuration
+- **QA results**: Quality assurance scores and assessments
+- **Call metadata**: Duration, timestamps, phone numbers, and status
+- **Outcomes**: Call results and next steps
+
+**Example response:**
+
+```json
+{
+  "call_log_id": 12345,
+  "target_id": "3ef78020-1e89-4496-9538-695f257ee001",
+  "campaign_id": "abc123",
+  "status": "completed",
+  "duration": 180,
+  "transcript": [
+    {
+      "speaker": "agent",
+      "text": "Hello, this is the AI assistant...",
+      "timestamp": 0
+    },
+    {
+      "speaker": "user",
+      "text": "Hi, I'm interested in...",
+      "timestamp": 3.5
+    }
+  ],
+  "extracted_data": {
+    "appointment_scheduled": true,
+    "customer_interest_level": "high"
+  },
+  "qa_results": {
+    "overall_score": 92,
+    "criteria": {...}
+  },
+  "created_at": "2024-01-15T10:30:00Z",
+  "completed_at": "2024-01-15T10:33:00Z"
+}
+```
+
+## Best Practices for Data Export
+
+### Bulk Export Workflow
+
+For exporting large volumes of call data:
+
+1. Use the **List Call Logs** endpoint with pagination to retrieve all call IDs
+2. Filter by date range to export data from specific time periods
+3. Use the **Get Call Log** endpoint to retrieve detailed information for each call
+4. Implement rate limiting and retry logic to handle API limits gracefully
+
+### Webhook-Based Export
+
+For real-time data export, configure the campaign webhook (as described in [Executing Calls within a Campaign](/quickstart/campaign-call)):
+
+1. Set up a webhook endpoint in your system
+2. Configure the webhook in the Prosper platform under `Campaign > Settings > Notifications`
+3. Receive real-time notifications when targets finish
+4. Use the `call_log_id` from the webhook payload to retrieve detailed call data immediately
+
+### Filtering and Search
+
+To efficiently locate specific calls:
+
+- Filter by **status** to retrieve only completed or failed calls
+- Use **date ranges** to export data from specific periods
+- Store `call_log_id` in your system for quick lookups
+
+## Summary
+
+| Step  | Action                                                                 |
+| ----- | ---------------------------------------------------------------------- |
+| **1** | List call logs using `GET /api/v1/campaigns/call-logs`  |
+| **2** | Apply filters (status, date range, pagination) to narrow results       |
+| **3** | Retrieve detailed call data using `GET /api/v1/campaigns/call-logs/{call_log_id}` |
+| **4** | Process and store transcript, extracted data, and QA results           |
+
+For additional details, refer to the API reference or reach out to our support team.
