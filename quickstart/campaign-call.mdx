@@ -58,11 +58,8 @@ Each campaign defines a **customizable webhook** to receive target results. Once
 ```
 {
   "campaign_id": uuid,
-  "call_log_id": int,
   "target_id": uuid,
-  "attempt": int,
-  "max_attempts": int,
-  "next_attempt_scheduled": datetz
+  "last_call_log_id": int
 }
 ```
 
