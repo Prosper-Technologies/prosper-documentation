@@ -29,7 +29,6 @@
     "name": "Dashboard",
     "url": "https://platform.getprosperapp.com"
   },
-  "openapi": "https://voice.getprosperapp.com/openapi.json",
   "tabs": [
     {
       "name": "API Reference",
@@ -39,6 +38,7 @@
   "anchors": [
     {
       "name": "API Reference",
+      "openapi": "https://voice.getprosperapp.com/openapi.json",
       "url": "api-reference",
       "icon": "square-terminal"
     }
