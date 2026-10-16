@@ -1,0 +1,54 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Prosper AI",
+  "logo": {
+    "dark": "/logo/prosper_logo.svg",
+    "light": "/logo/prosper_logo.svg"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#FF421C",
+    "light": "#07C983",
+    "dark": "#CC3516"
+  },
+  "appearance": {
+    "default": "light",
+    "strict": true
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@useprosper.co"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://platform.getprosperapp.com"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["introduction"]
+          },
+          {
+            "group": "Quickstart",
+            "pages": ["quickstart/campaign-call", "quickstart/export-data"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "square-terminal",
+        "openapi": "https://voice.getprosperapp.com/openapi.json"
+      }
+    ]
+  }
+}
