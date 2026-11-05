@@ -26,7 +26,7 @@ mintlify dev
 
 Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. This is not working right now.
 
-The API Reference tab is generated from the live spec at https://voice.getprosperapp.com/openapi.json, read when the site is deployed. To pick up new endpoints, push a commit that changes a file: Mintlify skips an empty commit ("No changes to preview").
+The API Reference tab is generated from the live spec at https://voice.getprosperapp.com/openapi.json, read when the site is deployed. To pick up new endpoints, push a commit that changes a site file (`docs.json` or a page). Mintlify skips an empty commit or a README-only one ("No changes to preview").
 
 #### Troubleshooting
 
